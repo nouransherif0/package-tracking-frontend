@@ -1,10 +1,14 @@
+
 import { Routes, Route, Navigate } from "react-router-dom"
 import Navbar from "./navbar"
 import Protect from "./protect"
-import Register from "./pages/register"
-import Login from "./pages/login"
-import CreateOrder from "./pages/createorder"
-import Soon from "./pages/soon"
+import Register from "./pages/Register"
+import Login from "./pages/Login"
+import CreateOrder from "./pages/CreateOrder"
+import MyOrders from "./pages/MyOrders"
+import OrderDetails from "./pages/OrderDetails"
+import Soon from "./pages/Soon"
+import AssignedOrders from "./pages/AssignedOrders"
 
 function App() {
   return (
@@ -12,14 +16,37 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Navigate to="/Login" />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/Login" element={<Login />} />
 
-        <Route path="/createorder" element={<Protect role="user"><CreateOrder /></Protect>} />
+        <Route
+          path="/CreateOrder"
+          element={
+            <Protect role="user">
+              <CreateOrder />
+            </Protect>
+          }
+        />
 
-        {/* team will replace these */}
-        <Route path="/myorders" element={<Protect role="user"><Soon title="my orders" /></Protect>} />
+        <Route
+          path="/MyOrders"
+          element={
+            <Protect role="user">
+              <MyOrders />
+            </Protect>
+          }
+        />
+
+        <Route
+          path="/orders/:id"
+          element={
+            <Protect role="user">
+              <OrderDetails />
+            </Protect>
+          }
+        />
+
         <Route path="/courier" element={<Protect role="courier"><Soon title="my deliveries" /></Protect>} />
         <Route path="/admin" element={<Protect role="admin"><Soon title="manage orders" /></Protect>} />
       </Routes>
