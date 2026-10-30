@@ -1,8 +1,20 @@
+/* CSS Variables */
+:root {
+  --color-bg: #D9FFE8;
+  --color-btn-bg: #FFD4F3;
+  --color-btn-text: #A21C7B;
+  --color-link: #A21C7B;
+  --color-title: #1a1a2e;
+}
+
+/* Body */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background: #f4f4f4;
+  background: var(--color-bg); /* غيرنا من #f4f4f4 للون الجديد */
 }
+
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -11,32 +23,18 @@ body {
   color: white;
   padding: 10px 20px;
 }
+
 .navbar a {
   color: white;
   margin-right: 15px;
   text-decoration: none;
 }
-.box {
-  max-width: 400px;
-  margin: 40px auto;
-  background: white;
-  padding: 25px;
-  border-radius: 8px;
+
+/* Error & Done messages */
+.error { 
+  color: red; 
 }
-.box input, .box textarea {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 12px;
-  padding: 8px;
+
+.done { 
+  color: green; 
 }
-.box button {
-  width: 100%;
-  padding: 10px;
-  background: #222;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-.error { color: red; }
-.done { color: green; }

@@ -16,35 +16,105 @@ function Register() {
     setError("")
 
     try {
-      await userapi.post("/users/register", { name, email, phone, password })
-
+      await userapi.post("/users/register", { name, email, phone, password }) /* data sent to backend */
       alert("registered, now login")
       navigate("/login")
-
     } catch (err) {
-       setError(err.response?.data?.message || "error registering user")
+      setError(err.response?.data?.message || "error registering user")
     }
   }
 
   return (
-    <div className="box">
-      <h2>register</h2>
+    <div
+      className="d-flex justify-content-center align-items-start min-vh-100 py-5"
+      style={{ backgroundColor: "var(--color-bg)" }}
+    >
+      <div className="w-100" style={{ maxWidth: "520px" }}>
+        <h2 className="fw-bold mb-1" style={{ color: "var(--color-title)", fontSize: "2.2rem" }}>
+          Create Account
+        </h2>
+        
 
-      {error && <p className="error">{error}</p>}
+        {error && (
+          <div className="alert alert-danger py-2" role="alert">
+            {error}
+          </div>
+        )}
 
-      <form onSubmit={submit}>
-        <input placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
+        <form onSubmit={submit}>
+          <div className="mb-3">
+            <label className="form-label fw-bold" style={{ color: "var(--color-title)" }}>
+              Full name
+            </label>
+            <input
+              type="text"
+              className="form-control form-control-lg rounded-3"
+              placeholder="Your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
-        <input placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <div className="mb-3">
+            <label className="form-label fw-bold" style={{ color: "var(--color-title)" }}>
+              Email
+            </label>
+            <input
+              type="email"
+              className="form-control form-control-lg rounded-3"
+              placeholder="name@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-        <input placeholder="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <div className="mb-3">
+            <label className="form-label fw-bold" style={{ color: "var(--color-title)" }}>
+              Phone
+            </label>
+            <input
+              type="text"
+              className="form-control form-control-lg rounded-3"
+              placeholder="01X XXXX XXXX"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
 
-        <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <div className="mb-3">
+            <label className="form-label fw-bold" style={{ color: "var(--color-title)" }}>
+              Password
+            </label>
+            <input
+              type="password"
+              className="form-control form-control-lg rounded-3"
+              placeholder="At least 8 characters"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-        <button type="submit">register</button>
-      </form>
+          <button
+            type="submit"
+            className="btn btn-lg w-100 rounded-3 fw-bold mt-2"
+            style={{
+              backgroundColor: "var(--color-btn-bg)",
+              color: "var(--color-btn-text)",
+              padding: "16px",
+              fontSize: "1.2rem",
+            }}
+          >
+            Register
+          </button>
+        </form>
 
-      <p>have an account? <Link to="/login">login</Link></p>
+        <p className="mt-4 mb-0">
+          Already have an account?{" "}
+          <Link to="/login" style={{ color: "var(--color-link)", fontWeight: "500" }}>
+            Log in
+          </Link>
+        </p>
+      </div>
     </div>
   )
 }

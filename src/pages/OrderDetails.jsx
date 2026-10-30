@@ -15,7 +15,7 @@ function OrderDetails() {
     async function getOrder() {
       try {
         const res = await orderapi.get(`/orders/${id}`)
-        setOrder(res.data)
+        setOrder(res.data.order || res.data)
       } catch (err) {
         setError(err.response?.data?.message || "failed to get order details")
       } finally {
@@ -60,7 +60,7 @@ function OrderDetails() {
           {error && <p className="text-danger">{error}</p>}
 
           <p>
-            <strong>Order ID:</strong> {order._id}
+            <strong>Order ID:</strong> {order.id ?? order._id}
           </p>
 
           <p>

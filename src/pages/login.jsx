@@ -16,6 +16,8 @@ function Login() {
     try {
       const res = await userapi.post("/users/login", { email, password })
 
+
+      //after login, the frontend receives the token and save it in local storage
       localStorage.setItem("token", res.data.token)
       localStorage.setItem("user", JSON.stringify(res.data.user))
 

@@ -1,5 +1,13 @@
 import axios from "axios"
 
+export function getStoredUser() {
+  try {
+    return JSON.parse(localStorage.getItem("user") || "null")
+  } catch {
+    return null
+  }
+}
+
 export const userapi = axios.create({
   baseURL: "http://localhost:5001/api"
 })

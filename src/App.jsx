@@ -2,12 +2,12 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 import Navbar from "./navbar"
 import Protect from "./protect"
-import Register from "./pages/Register"
-import Login from "./pages/Login"
-import CreateOrder from "./pages/CreateOrder"
+import Register from "./pages/register"
+import Login from "./pages/login"
+import CreateOrder from "./pages/createorder"
 import MyOrders from "./pages/MyOrders"
 import OrderDetails from "./pages/OrderDetails"
-import Soon from "./pages/Soon"
+import Soon from "./pages/soon"
 import AssignedOrders from "./pages/AssignedOrders"
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
           }
         />
 
-        <Route path="/courier" element={<Protect role="courier"><Soon title="my deliveries" /></Protect>} />
+        <Route path="/courier" element={<Protect role="courier"><AssignedOrders /></Protect>} />
         <Route path="/admin" element={<Protect role="admin"><Soon title="manage orders" /></Protect>} />
       </Routes>
     </div>

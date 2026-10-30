@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import { orderapi } from "../api"
 
 function MyOrders() {
@@ -11,7 +12,7 @@ function MyOrders() {
     async function getOrders() {
       try {
         const res = await orderapi.get("/orders")
-        setOrders(res.data)
+        setOrders(Array.isArray(res.data) ? res.data : res.data.orders || [])
       } catch (err) {
         setError(err.response?.data?.message || "failed to get orders")
       } finally {
@@ -36,11 +37,11 @@ function MyOrders() {
 
       <div className="row g-3">
         {orders.map((order) => (
-          <div className="col-12 col-md-6 col-lg-4" key={order._id}>
+          <div className="col-12 col-md-6 col-lg-4" key={order.id ?? order._id}>
             <div className="card h-100">
               <div className="card-body">
                 <h5 className="card-title">
-                  Order #{order._id}
+                  Order #{order.id ?? order._id}
                 </h5>
 
                 <p>
@@ -56,12 +57,13 @@ function MyOrders() {
                 </p>
 
                 <p>
-                  <strong>Delivery time:</strong> {order.deliverytime}
+                  <strong>Delivery time:</strong> {order.deliverytime ? new Date(order.deliverytime).toLocaleString() : "Not set"}
                 </p>
 
                 <p className="mb-0">
                   <strong>Status:</strong> {order.status || "Pending"}
                 </p>
+                <Link className="btn btn-primary mt-3" to={`/orders/${order.id ?? order._id}`}>View details</Link>
               </div>
             </div>
           </div>

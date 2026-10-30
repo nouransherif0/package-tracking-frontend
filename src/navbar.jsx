@@ -1,8 +1,9 @@
 import { Link, useNavigate } from "react-router-dom"
+import { getStoredUser } from "./api"
 
 function Navbar() {
   const navigate = useNavigate()
-  const user = JSON.parse(localStorage.getItem("user")) ;
+  const user = getStoredUser()
 
   function logout() {
     localStorage.removeItem("token")

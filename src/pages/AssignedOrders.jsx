@@ -29,7 +29,7 @@ function AssignedOrders() {
       const res = await orderapi.patch(`/orders/${id}/${action}`)
 
       setOrders(orders.map((order) =>
-        order._id === id
+        (order.id ?? order._id) === id
           ? res.data.order || {
               ...order,
               status: action === "accept" ? "Accepted" : "Declined"
@@ -55,11 +55,11 @@ function AssignedOrders() {
 
       <div className="row g-3">
         {orders.map((order) => (
-          <div className="col-12 col-md-6 col-lg-4" key={order._id}>
+          <div className="col-12 col-md-6 col-lg-4" key={order.id ?? order._id}>
             <div className="card h-100">
               <div className="card-body">
                 <h5 className="card-title">
-                  Order #{order._id}
+                  Order #{order.id ?? order._id}
                 </h5>
 
                 <p>
@@ -82,14 +82,14 @@ function AssignedOrders() {
                   <div>
                     <button
                       className="btn btn-success me-2"
-                      onClick={() => updateOrder(order._id, "accept")}
+                      onClick={() => updateOrder(order.id ?? order._id, "accept")}
                     >
                       accept
                     </button>
 
                     <button
                       className="btn btn-danger"
-                      onClick={() => updateOrder(order._id, "decline")}
+                      onClick={() => updateOrder(order.id ?? order._id, "decline")}
                     >
                       decline
                     </button>
