@@ -1,3 +1,4 @@
+
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { userapi } from "../api"
@@ -42,20 +43,88 @@ function Login() {
   }
 
   return (
-    <div className="box">
-      <h2>login</h2>
+    <div
+      className="container-fluid min-vh-100 d-flex justify-content-center"
+      style={{ backgroundColor: "var(--color-bg)", padding: "75px 20px" }}
+    >
+      <div className="w-100" style={{ maxWidth: "546px" }}>
 
-      {error && <p className="error">{error}</p>}
+        <h1
+          className="fw-bold mb-3"
+          style={{ fontSize: "44px", color: "#17142e" }}
+        >
+          Log in
+        </h1>
 
-      <form onSubmit={submit}>
-        <input placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <p
+          className="mb-4"
+          style={{ fontSize: "21px", color: "#35415c" }}
+        >
+          Use the email you registered with.
+        </p>
 
-        <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        {error && <p className="text-danger">{error}</p>}
 
-        <button type="submit">login</button>
-      </form>
+        <form onSubmit={submit}>
 
-      <p>no account? <Link to="/register">register</Link></p>
+          <div className="mb-4">
+            <label className="form-label fw-semibold">
+              Email
+            </label>
+
+            <input
+              placeholder="name@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="form-control rounded-4 p-3"
+              style={{ fontSize: "18px" }}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="form-label fw-semibold">
+              Password
+            </label>
+
+            <input
+              type="password"
+              placeholder="Your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-control rounded-4 p-3"
+              style={{ fontSize: "18px" }}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="btn w-100 rounded-4 fw-semibold p-3"
+            style={{
+              backgroundColor: "#fbd2ef",
+              border: "1px solid #ed83cd",
+              color: "#27102c",
+              fontSize: "21px"
+            }}
+          >
+            Log in
+          </button>
+
+        </form>
+
+        <p
+          className="mt-5"
+          style={{ fontSize: "18px", color: "#35415c" }}
+        >
+          New here?{" "}
+          <Link
+            to="/register"
+            style={{ color: "#c21883" }}
+          >
+            Create an account
+          </Link>
+        </p>
+
+      </div>
     </div>
   )
 }
