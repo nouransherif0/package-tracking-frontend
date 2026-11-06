@@ -1,20 +1,21 @@
 import { Navigate } from "react-router-dom"
-import { getStoredUser } from "./api"
+import { getuser } from "./api"
+
 
 // only lets the right role open the page
-function Protect({ role, children }) {
-  const token = localStorage.getItem("token")
-  const user = getStoredUser()
+function Protect({ role, children }) 
+{
+  const token = localStorage.getItem("token") ;
+   const user = getuser() ;
 
-  if (!token || !user) {
-     return <Navigate to="/login" />
+  if (!token || !user) { return <Navigate to="/login" /> ; }
+
+  if (user.role !== role) 
+  {
+      return <Navigate to="/login" />
   }
 
-  if (user.role !== role) {
-    return <Navigate to="/login" />
-  }
-
-  return children
+  return children ;
 }
 
 export default Protect
